@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using TicketSales.Admin.Consumers;
 using TicketSales.Admin.Services;
 using TicketSales.Messages.Commands;
+using TicketSales.Core.Web.Commands;
 
 namespace TicketSales.Admin
 {
@@ -32,11 +33,12 @@ namespace TicketSales.Admin
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddSingleton<IStoreConcerts, ConcertStore>();
             services.AddSingleton<TestMessageStore>();
 
             services.AddMassTransit(x =>
             {
-                x.AddConsumer<TestEventHandler>();
+                x.AddConsumer<ConcertCreatedEventHandler>();
 
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
@@ -46,9 +48,9 @@ namespace TicketSales.Admin
                     {
                         e.PrefetchCount = 16;
 
-                        e.ConfigureConsumer<TestEventHandler>(provider);
+                        e.ConfigureConsumer<ConcertCreatedEventHandler>(provider);
 
-                        EndpointConvention.Map<TestCommand>(new Uri("rabbitmq://localhost/tickets/core"));
+                        EndpointConvention.Map<CreateConcertCommand>(new Uri("rabbitmq://localhost/tickets/core"));
                     });
 
                     // or, configure the endpoints by convention

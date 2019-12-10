@@ -20,7 +20,7 @@ namespace Application.CreateConcert
         {
             var concert = new Concert(request.Name, new TicketQuantity(request.SeatingCapacity));
             await _concertRepository.AddConcert(concert);
-            await _eventPublisher.Publish(new ConcertCreatedEvent(concert.Name, concert.SeatingCapacity));
+            await _eventPublisher.Publish(new ConcertCreatedEvent(concert.Id, concert.Name, concert.SeatingCapacity));
         }
     }
 }
