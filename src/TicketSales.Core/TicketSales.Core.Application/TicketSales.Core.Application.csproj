@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="5.5.5" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="5.5.5" />
+    <PackageReference Include="Microsoft.Net.Compilers" Version="2.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicketSales.Core.Domain\TicketSales.Core.Domain.csproj" />
+    <ProjectReference Include="..\TicketSales.Messages\TicketSales.Messages.csproj" />
+  </ItemGroup>
+
+</Project>

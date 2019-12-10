@@ -1,0 +1,13 @@
+﻿@model int
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div>
+        count: @Model
+    </div>
+    <form action="/home/index" method="post">
+        <input type="submit" value="click me" />
+    </form>
+</div>
