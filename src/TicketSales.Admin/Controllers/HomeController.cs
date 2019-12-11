@@ -1,47 +1,53 @@
 ﻿using System;
-using System.Diagnostics;
-using MassTransit;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using TicketSales.Admin.Models;
 using TicketSales.Admin.Services;
-using TicketSales.Messages.Commands;
+using MassTransit;
+using TicketSales.Core.Web.Commands;
 
 namespace TicketSales.Admin.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IBus _bus;
-        private readonly TestMessageStore _store;
+        private readonly IStoreConcerts _concertStore;
 
-        public HomeController(IBus bus, TestMessageStore store)
+        public HomeController(IBus bus, IStoreConcerts concertStore)
         {
-            _bus = bus ?? throw new ArgumentNullException(nameof(bus));
-            _store = store;
+            _bus = bus;
+            _concertStore = concertStore;
         }
 
-        public IActionResult Index()
+        // GET: Concerts
+        public async Task<IActionResult> Index()
         {
-            int count = _store.GetCount();
-            return View(count);
+            return View(await _concertStore.GetAll());
         }
 
-        [HttpPost, ActionName("Index")]
-        public IActionResult IndexPost()
-        {
-            _bus.Send(new TestCommand());
-            int count = _store.GetCount();
-            return View(count);
-        }
-
-        public IActionResult Privacy()
+        // GET: Concerts/Create
+        public IActionResult Create()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        // POST: Concerts/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Name,Capacity")] Concert concert)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (ModelState.IsValid)
+            {
+                await _bus.Send(new CreateConcertCommand { Name = concert.Name, SeatingCapacity = concert.Capacity });
+                return RedirectToAction(nameof(Index));
+            }
+            return View(concert);
         }
     }
 }

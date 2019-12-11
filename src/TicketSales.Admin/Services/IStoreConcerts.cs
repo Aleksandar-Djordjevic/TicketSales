@@ -1,13 +1,14 @@
 ﻿using CSharpFunctionalExtensions;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TicketSales.Admin.Models;
 
 namespace TicketSales.Admin.Services
 {
     public interface IStoreConcerts
     {
-        void AddConcert(Concert concert);
-        Maybe<Concert> Get(string id);
-        List<Concert> GetAll();
+        Task AddConcert(Concert concert);
+        Task<Maybe<Concert>> Get(string id);
+        Task<List<Concert>> GetAll();
     }
 }

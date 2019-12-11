@@ -19,19 +19,17 @@ namespace TicketSales.Admin.Consumers
             _concertsStore = concertsStore;
         }
 
-        public Task Consume(ConsumeContext<ConcertCreatedEvent> context)
+        public async Task Consume(ConsumeContext<ConcertCreatedEvent> context)
         {
-            _concertsStore.Get(context.Message.Id)
-                .Match(null, () => _concertsStore.AddConcert(
-                    new Concert
-                    {
-                        Id = context.Message.Id,
-                        Name = context.Message.Name,
-                        Capacity = context.Message.SeatingCapacity,
-                    })
-                );
-
-            return Task.CompletedTask;
+            var concert = await _concertsStore.Get(context.Message.Id);
+            await concert.Match(null, () => _concertsStore.AddConcert(
+                new Concert
+                {
+                    Id = context.Message.Id,
+                    Name = context.Message.Name,
+                    Capacity = context.Message.SeatingCapacity,
+                })
+            );
         }
     }
 }

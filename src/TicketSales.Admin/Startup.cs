@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TicketSales.Admin.Consumers;
 using TicketSales.Admin.Services;
-using TicketSales.Messages.Commands;
 using TicketSales.Core.Web.Commands;
 
 namespace TicketSales.Admin
@@ -34,7 +33,6 @@ namespace TicketSales.Admin
             });
 
             services.AddSingleton<IStoreConcerts, ConcertStore>();
-            services.AddSingleton<TestMessageStore>();
 
             services.AddMassTransit(x =>
             {

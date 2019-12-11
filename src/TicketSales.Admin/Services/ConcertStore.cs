@@ -9,21 +9,31 @@ namespace TicketSales.Admin.Services
 {
     public class ConcertStore : IStoreConcerts
     {
-        private readonly List<Concert> _concerts = new List<Concert>();
+        private readonly List<Concert> _concerts;
 
-        public void AddConcert(Concert concert)
+        public ConcertStore()
+        {
+            _concerts = new List<Concert>
+            {
+                new Concert { Id = "1", Name = "My first concert ever", Capacity = 1000, TicketsSold = 0 }
+            };
+        }
+
+        public Task AddConcert(Concert concert)
         {
             _concerts.Add(concert);
+            return Task.CompletedTask;
         }
 
-        public Maybe<Concert> Get(string id)
+        public Task<Maybe<Concert>> Get(string id)
         {
-            return _concerts.TryFirst(concert => concert.Id == id);
+            var result = _concerts.TryFirst(concert => concert.Id == id);
+            return Task.FromResult(result);
         }
 
-        public List<Concert> GetAll()
+        public Task<List<Concert>> GetAll()
         {
-            return _concerts;
+            return Task.FromResult(_concerts);
         }
     }
 }
