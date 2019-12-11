@@ -10,5 +10,6 @@ namespace TicketSales.Admin.Services
         Task AddConcert(Concert concert);
         Task<Maybe<Concert>> Get(string id);
         Task<List<Concert>> GetAll();
+        Task UpdateConcert(Concert concert);
     }
 }

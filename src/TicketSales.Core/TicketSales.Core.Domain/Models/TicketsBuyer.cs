@@ -9,9 +9,9 @@ namespace TicketSales.Core.Domain.Models
         public string Name { get; }
         public List<Tickets> Purchases { get; }
 
-        public TicketsBuyer(string name)
+        public TicketsBuyer(string id, string name)
         {
-            Id = Guid.NewGuid().ToString();
+            Id = id;
             Name = name;
             Purchases = new List<Tickets>();
         }

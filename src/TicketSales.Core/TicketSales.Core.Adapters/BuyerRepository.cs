@@ -14,7 +14,7 @@ namespace TicketSales.Core.Adapters
 
         public BuyerRepository()
         {
-            _buyers = new List<TicketsBuyer>();
+            _buyers = new List<TicketsBuyer> { new TicketsBuyer("1", "Alex")};
         }
 
         public Task<Maybe<TicketsBuyer>> GetBuyer(string buyerId)

@@ -33,5 +33,12 @@ namespace TicketSales.Admin.Services
         {
             return Task.FromResult(_concerts);
         }
+
+        public Task UpdateConcert(Concert concert)
+        {
+            var result = _concerts.TryFirst(con => con.Id == concert.Id);
+            result.Execute(con => con.TicketsSold = concert.TicketsSold);
+            return Task.CompletedTask;
+        }
     }
 }

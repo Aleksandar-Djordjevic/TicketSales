@@ -19,13 +19,15 @@ namespace TicketSales.Admin.Consumers
         public async Task Consume(ConsumeContext<ConcertCreatedEvent> context)
         {
             var concert = await _concertsStore.Get(context.Message.Id);
-            await concert.Match(null, () => _concertsStore.AddConcert(
-                new Concert
-                {
-                    Id = context.Message.Id,
-                    Name = context.Message.Name,
-                    Capacity = context.Message.SeatingCapacity,
-                })
+            await concert.Match(
+                Some: null, 
+                None: () => _concertsStore.AddConcert(
+                    new Concert
+                    {
+                        Id = context.Message.Id,
+                        Name = context.Message.Name,
+                        Capacity = context.Message.SeatingCapacity,
+                    })
             );
         }
     }

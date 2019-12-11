@@ -39,7 +39,12 @@ namespace TicketSales.Core.Application.UseCases.SellTickets
                         .Bind(buyer => _ticketsService.SellTickets(concert, buyer, new TicketQuantity(request.Quantity)))
                         .Tap(purchase =>
                         {
-                            _eventPublisher.Publish(new PurchaseSuccessfullyMadeEvent());
+                            _eventPublisher.Publish(new PurchaseSuccessfullyMadeEvent
+                            {
+                                ConcertId = purchase.Tickets.Concert.Id,
+                                BuyerId = purchase.Buyer.Id,
+                                Quantity = purchase.Tickets.Quantity
+                            });
                         });
                 })
                 .OnFailure(error => {

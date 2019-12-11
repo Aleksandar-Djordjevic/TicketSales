@@ -36,6 +36,7 @@ namespace TicketSales.Admin
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<ConcertCreatedEventHandler>();
+                x.AddConsumer<PurchaseSuccessfullyMadeEventHandler>();
 
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
@@ -44,8 +45,6 @@ namespace TicketSales.Admin
                     cfg.ReceiveEndpoint(host, "admin", e =>
                     {
                         e.PrefetchCount = 16;
-
-                        e.ConfigureConsumer<ConcertCreatedEventHandler>(provider);
 
                         EndpointConvention.Map<CreateConcertCommand>(new Uri("rabbitmq://localhost/tickets/core"));
                     });
