@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TicketSales.Core.Adapters\TicketSales.Core.Adapters.csproj" />
     <ProjectReference Include="..\TicketSales.Core.Application\TicketSales.Core.Application.csproj" />
     <ProjectReference Include="..\TicketSales.Core.Domain\TicketSales.Core.Domain.csproj" />
   </ItemGroup>

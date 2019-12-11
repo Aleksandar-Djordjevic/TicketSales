@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TicketSales.Core.Application.UseCases.BuyTickets
+﻿namespace TicketSales.Core.Application.UseCases.SellTickets
 {
     public class SellTicketsRequest
     {

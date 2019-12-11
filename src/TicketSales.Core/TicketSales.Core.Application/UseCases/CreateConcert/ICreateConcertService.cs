@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Application.CreateConcert
+namespace TicketSales.Core.Application.UseCases.CreateConcert
 {
     public interface ICreateConcertService
     {

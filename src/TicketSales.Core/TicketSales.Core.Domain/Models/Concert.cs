@@ -1,6 +1,7 @@
-﻿using CSharpFunctionalExtensions;
+﻿using System;
+using CSharpFunctionalExtensions;
 
-namespace Domain.Models
+namespace TicketSales.Core.Domain.Models
 {
     public class Concert
     {
@@ -11,6 +12,7 @@ namespace Domain.Models
 
         public Concert(string name, TicketQuantity seatingCapacity)
         {
+            Id = Guid.NewGuid().ToString();
             Name = name;
             SeatingCapacity = seatingCapacity;
             TicketsSold = 0;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Models
+namespace TicketSales.Core.Domain.Models
 {
     public class TicketQuantity
     {

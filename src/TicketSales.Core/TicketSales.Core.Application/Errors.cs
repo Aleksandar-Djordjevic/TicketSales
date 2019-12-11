@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TicketSales.Core.Application
+﻿namespace TicketSales.Core.Application
 {
     public class Errors
     {

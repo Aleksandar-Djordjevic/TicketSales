@@ -1,4 +1,4 @@
-﻿namespace Domain.Models
+﻿namespace TicketSales.Core.Domain.Models
 {
     public class Tickets
     {

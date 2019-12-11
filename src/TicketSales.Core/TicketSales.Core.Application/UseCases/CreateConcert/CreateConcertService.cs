@@ -1,9 +1,9 @@
-﻿using Application.Ports;
-using Domain.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TicketSales.Core.Application.Ports;
 using TicketSales.Core.Domain.Events;
+using TicketSales.Core.Domain.Models;
 
-namespace Application.CreateConcert
+namespace TicketSales.Core.Application.UseCases.CreateConcert
 {
     public class CreateConcertService : ICreateConcertService
     {

@@ -1,7 +1,7 @@
-﻿using TicketSales.Core.Domain.Events;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using TicketSales.Core.Domain.Events;
 
-namespace Application.Ports
+namespace TicketSales.Core.Application.Ports
 {
     public interface IPublishEvents
     {

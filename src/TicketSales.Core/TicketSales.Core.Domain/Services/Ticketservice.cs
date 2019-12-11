@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
-using Domain.Models;
+using TicketSales.Core.Domain.Models;
 
-namespace Domain.Services
+namespace TicketSales.Core.Domain.Services
 {
     public class TicketsService : ITicketsService
     {

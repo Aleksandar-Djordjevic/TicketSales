@@ -1,11 +1,8 @@
-﻿using CSharpFunctionalExtensions;
-using Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using CSharpFunctionalExtensions;
+using TicketSales.Core.Domain.Models;
 
-namespace Application.Ports
+namespace TicketSales.Core.Application.Ports
 {
     public interface IConcertRepository
     {

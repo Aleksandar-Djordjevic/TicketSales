@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using TicketSales.Core.Application;
+using TicketSales.Core.Adapters;
+using TicketSales.Core.Application.Ports;
 using TicketSales.Core.Web.CommandHandlers;
 
 namespace TicketSales.Core.Web
@@ -14,6 +15,9 @@ namespace TicketSales.Core.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IConcertRepository, ConcertRepository>();
+            services.AddSingleton<IBuyerRepository, BuyerRepository>();
+
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<CreateConcertCommandHandler>();

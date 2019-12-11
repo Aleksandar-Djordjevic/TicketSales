@@ -1,4 +1,4 @@
-﻿namespace Domain
+﻿namespace TicketSales.Core.Domain
 {
     public class Errors
     {

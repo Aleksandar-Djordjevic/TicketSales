@@ -1,4 +1,4 @@
-﻿namespace Application.CreateConcert
+﻿namespace TicketSales.Core.Application.UseCases.CreateConcert
 {
     public class CreateConcertRequest
     {

@@ -1,12 +1,10 @@
-﻿using Application.Ports;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Domain.Models;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
+using TicketSales.Core.Application.Ports;
+using TicketSales.Core.Domain.Models;
 
-namespace Application.Adapters
+namespace TicketSales.Core.Adapters
 {
     public class ConcertRepository : IConcertRepository
     {

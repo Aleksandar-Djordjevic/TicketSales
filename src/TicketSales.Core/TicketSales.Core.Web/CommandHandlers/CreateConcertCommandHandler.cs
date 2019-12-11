@@ -1,9 +1,6 @@
-﻿using Application.CreateConcert;
-using MassTransit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using MassTransit;
 using System.Threading.Tasks;
+using TicketSales.Core.Application.UseCases.CreateConcert;
 using TicketSales.Core.Web.Commands;
 
 namespace TicketSales.Core.Web.CommandHandlers

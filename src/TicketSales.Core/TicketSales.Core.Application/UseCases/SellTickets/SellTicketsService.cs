@@ -1,15 +1,11 @@
-﻿using Application.Ports;
+﻿using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using Domain.Models;
-using Domain.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using TicketSales.Core.Application.Ports;
 using TicketSales.Core.Domain.Events;
+using TicketSales.Core.Domain.Models;
+using TicketSales.Core.Domain.Services;
 
-namespace TicketSales.Core.Application.UseCases.BuyTickets
+namespace TicketSales.Core.Application.UseCases.SellTickets
 {
     public class SellTicketsService : ISellTicketsService
     {

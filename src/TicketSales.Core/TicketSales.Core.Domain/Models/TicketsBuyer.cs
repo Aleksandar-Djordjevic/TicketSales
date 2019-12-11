@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Domain.Models
+namespace TicketSales.Core.Domain.Models
 {
     public class TicketsBuyer
     {
+        public string Id { get; }
         public string Name { get; }
         public List<Tickets> Purchases { get; }
 
         public TicketsBuyer(string name)
         {
+            Id = Guid.NewGuid().ToString();
             Name = name;
             Purchases = new List<Tickets>();
         }

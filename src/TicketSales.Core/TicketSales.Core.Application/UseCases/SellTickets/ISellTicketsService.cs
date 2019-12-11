@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
-using Domain.Models;
+using TicketSales.Core.Domain.Models;
 
-namespace TicketSales.Core.Application.UseCases.BuyTickets
+namespace TicketSales.Core.Application.UseCases.SellTickets
 {
     public interface ISellTicketsService
     {

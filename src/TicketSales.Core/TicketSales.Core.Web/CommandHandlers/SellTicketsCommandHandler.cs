@@ -1,9 +1,6 @@
 ﻿using MassTransit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using TicketSales.Core.Application.UseCases.BuyTickets;
+using TicketSales.Core.Application.UseCases.SellTickets;
 using TicketSales.Core.Web.Commands;
 
 namespace TicketSales.Core.Web.CommandHandlers
