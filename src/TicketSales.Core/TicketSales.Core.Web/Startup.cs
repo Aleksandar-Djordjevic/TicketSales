@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using TicketSales.Core.Adapters;
 using TicketSales.Core.Application.Ports;
+using TicketSales.Core.Application.UseCases.CreateConcert;
+using TicketSales.Core.Application.UseCases.SellTickets;
 using TicketSales.Core.Web.CommandHandlers;
 
 namespace TicketSales.Core.Web
@@ -17,6 +19,9 @@ namespace TicketSales.Core.Web
         {
             services.AddSingleton<IConcertRepository, ConcertRepository>();
             services.AddSingleton<IBuyerRepository, BuyerRepository>();
+            services.AddTransient<ICreateConcertService, CreateConcertService>();
+            services.AddTransient<ISellTicketsService, SellTicketsService>();
+            services.AddTransient<IPublishEvents, EventsPublisher>();
 
             services.AddMassTransit(x =>
             {
