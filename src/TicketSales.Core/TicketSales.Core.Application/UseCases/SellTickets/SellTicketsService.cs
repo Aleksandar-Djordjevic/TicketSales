@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using TicketSales.Core.Application.Ports;
 using TicketSales.Core.Domain.Events;
@@ -41,14 +42,23 @@ namespace TicketSales.Core.Application.UseCases.SellTickets
                         {
                             _eventPublisher.Publish(new PurchaseSuccessfullyMadeEvent
                             {
+                                Id = purchase.Id,
                                 ConcertId = purchase.Tickets.Concert.Id,
+                                ConcertName = purchase.Tickets.Concert.Name,
                                 BuyerId = purchase.Buyer.Id,
                                 Quantity = purchase.Tickets.Quantity
                             });
                         });
                 })
                 .OnFailure(error => {
-                    _eventPublisher.Publish(new PurchaseFailedEvent());
+                    _eventPublisher.Publish(new PurchaseFailedEvent
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        ConcertId = request.ConcertId,
+                        ConcertName = "Unknown",// ToDo Alex
+                        BuyerId = request.BuyerId,
+                        Quantity = request.Quantity
+                    });
                 });
             return result;
         }
