@@ -11,10 +11,8 @@ namespace TicketSales.Admin.Services
 
         public ConcertStore()
         {
-            _concerts = new List<Concert>
-            {
-                new Concert { Id = "1", Name = "My first concert ever", Capacity = 1000, TicketsSold = 0 }
-            };
+            _concerts = new List<Concert>();
+            //new Concert { Id = "1", Name = "My first concert ever", Capacity = 1000, TicketsSold = 0 }
         }
 
         public Task AddConcert(Concert concert)

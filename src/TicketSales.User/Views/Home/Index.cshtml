@@ -1,8 +1,23 @@
-﻿@model int
+﻿@model IEnumerable<TicketSales.User.Models.ConcertToBuy>
+
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Concerts";
 }
 
-<div class="text-center">
-    count: @Model
-</div>
+<h1>Concerts</h1>
+
+
+<table class="table">
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="BuyTickets" asp-route-id="@item.Id">Buy Tickets</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

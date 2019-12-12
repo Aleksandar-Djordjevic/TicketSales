@@ -10,6 +10,7 @@ using TicketSales.Core.Web.Commands;
 using TicketSales.User.Consumers;
 using TicketSales.User.Services;
 using Microsoft.EntityFrameworkCore;
+using TicketSales.User.Models;
 
 namespace TicketSales.User
 {
@@ -33,6 +34,7 @@ namespace TicketSales.User
             });
 
             services.AddSingleton<IStoreConcerts, ConcertStore>();
+            services.AddSingleton<IStorePurchases, PurchaseStore>();
 
             services.AddMassTransit(x =>
             {
@@ -47,6 +49,10 @@ namespace TicketSales.User
                     cfg.ReceiveEndpoint(host, "user", e =>
                     {
                         e.PrefetchCount = 16;
+
+                        e.ConfigureConsumer<ConcertCreatedEventHandler>(provider);
+                        e.ConfigureConsumer<PurchaseSuccessfullyMadeEventHandler>(provider);
+                        e.ConfigureConsumer<PurchaseFailedEventHandler>(provider);
 
                         EndpointConvention.Map<SellTicketsCommand>(new Uri("rabbitmq://localhost/tickets/core"));
                     });

@@ -22,11 +22,10 @@ namespace TicketSales.User.Consumers
             await concert.Match(
                 Some: null, 
                 None: () => _concertsStore.AddConcert(
-                    new Concert
+                    new ConcertToBuy
                     {
                         Id = context.Message.Id,
                         Name = context.Message.Name,
-                        Capacity = context.Message.SeatingCapacity,
                     })
             );
         }

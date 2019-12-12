@@ -46,6 +46,9 @@ namespace TicketSales.Admin
                     {
                         e.PrefetchCount = 16;
 
+                        e.ConfigureConsumer<ConcertCreatedEventHandler>(provider);
+                        e.ConfigureConsumer<PurchaseSuccessfullyMadeEventHandler>(provider);
+
                         EndpointConvention.Map<CreateConcertCommand>(new Uri("rabbitmq://localhost/tickets/core"));
                     });
 

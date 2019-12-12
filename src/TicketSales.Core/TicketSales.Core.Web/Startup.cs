@@ -7,6 +7,7 @@ using TicketSales.Core.Adapters;
 using TicketSales.Core.Application.Ports;
 using TicketSales.Core.Application.UseCases.CreateConcert;
 using TicketSales.Core.Application.UseCases.SellTickets;
+using TicketSales.Core.Domain.Services;
 using TicketSales.Core.Web.CommandHandlers;
 
 namespace TicketSales.Core.Web
@@ -22,6 +23,7 @@ namespace TicketSales.Core.Web
             services.AddTransient<ICreateConcertService, CreateConcertService>();
             services.AddTransient<ISellTicketsService, SellTicketsService>();
             services.AddTransient<IPublishEvents, EventsPublisher>();
+            services.AddTransient<ITicketsService, TicketsService>();
 
             services.AddMassTransit(x =>
             {

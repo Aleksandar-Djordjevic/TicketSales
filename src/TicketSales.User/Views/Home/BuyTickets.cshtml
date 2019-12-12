@@ -1,0 +1,37 @@
+﻿@model TicketSales.User.Models.ConcertToBuy
+
+@{
+    ViewData["Title"] = "Buy Tickets";
+}
+
+<h1>Buy Tickets</h1>
+
+
+<h4>@Html.DisplayFor(model => model.Name)</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-2">
+        <form asp-action="BuyTickets">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <span>
+                    <label asp-for="Quantity" class="control-label"></label>
+                    <input asp-for="Quantity" class="form-control" />
+                </span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buy Tickets" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

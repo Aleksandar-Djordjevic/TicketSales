@@ -7,38 +7,30 @@ namespace TicketSales.User.Services
 {
     public class ConcertStore : IStoreConcerts
     {
-        private readonly List<Concert> _concerts;
+        private readonly List<ConcertToBuy> _concerts;
 
         public ConcertStore()
         {
-            _concerts = new List<Concert>
-            {
-                new Concert { Id = "1", Name = "My first concert ever", Capacity = 1000, TicketsSold = 0 }
-            };
+            _concerts = new List<ConcertToBuy>();
+            //new ConcertToBuy { Id = "1", Name = "My first concert"},
+            //new ConcertToBuy { Id = "2", Name = "My second concert"}
         }
 
-        public Task AddConcert(Concert concert)
+        public Task AddConcert(ConcertToBuy concertToBuy)
         {
-            _concerts.Add(concert);
+            _concerts.Add(concertToBuy);
             return Task.CompletedTask;
         }
 
-        public Task<Maybe<Concert>> Get(string id)
+        public Task<Maybe<ConcertToBuy>> Get(string id)
         {
             var result = _concerts.TryFirst(concert => concert.Id == id);
             return Task.FromResult(result);
         }
 
-        public Task<List<Concert>> GetAll()
+        public Task<List<ConcertToBuy>> GetAll()
         {
             return Task.FromResult(_concerts);
-        }
-
-        public Task UpdateConcert(Concert concert)
-        {
-            var result = _concerts.TryFirst(con => con.Id == concert.Id);
-            result.Execute(con => con.TicketsSold = concert.TicketsSold);
-            return Task.CompletedTask;
         }
     }
 }
