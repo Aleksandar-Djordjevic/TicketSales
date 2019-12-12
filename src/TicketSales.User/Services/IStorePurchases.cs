@@ -10,6 +10,5 @@ namespace TicketSales.User.Services
         Task<Maybe<Purchase>> Get(string id);
         Task<List<Purchase>> GetAllForBuyer(string buyerId);
         Task Add(Purchase purchase);
-        Task UpdateStatus(string purchaseId, string status);
     }
 }

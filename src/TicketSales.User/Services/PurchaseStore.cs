@@ -32,12 +32,5 @@ namespace TicketSales.User.Services
             _purchases.Add(purchase);
             return Task.CompletedTask;
         }
-
-        public Task UpdateStatus(string purchaseId, string status)
-        {
-            var result = _purchases.TryFirst(pur => pur.Id == purchaseId);
-            result.Execute(pur => pur.Status = status);
-            return Task.CompletedTask;
-        }
     }
 }
