@@ -20,6 +20,7 @@
     <ProjectReference Include="..\TicketSales.Core\TicketSales.Core.Domain\TicketSales.Core.Domain.csproj" />
     <ProjectReference Include="..\TicketSales.Core\TicketSales.Core.Web\TicketSales.Core.Web.csproj" />
     <ProjectReference Include="..\TicketSales.Core\TicketSales.Messages\TicketSales.Messages.csproj" />
+    <ProjectReference Include="..\TicketSales.Utils\TicketSales.Utils.csproj" />
   </ItemGroup>
 
 </Project>

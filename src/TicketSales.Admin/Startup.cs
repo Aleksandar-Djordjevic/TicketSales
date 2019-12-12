@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TicketSales.Admin.Consumers;
 using TicketSales.Admin.Services;
 using TicketSales.Core.Web.Commands;
+using TicketSales.Utils.Idempotency;
 
 namespace TicketSales.Admin
 {
@@ -32,6 +33,7 @@ namespace TicketSales.Admin
             });
 
             services.AddSingleton<IStoreConcerts, ConcertStore>();
+            services.AddSingleton<IIdempotencyService, IdempotencyService>();
 
             services.AddMassTransit(x =>
             {

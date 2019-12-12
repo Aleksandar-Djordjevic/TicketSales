@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using TicketSales.Admin.Models;
@@ -12,7 +13,6 @@ namespace TicketSales.Admin.Services
         public ConcertStore()
         {
             _concerts = new List<Concert>();
-            //new Concert { Id = "1", Name = "My first concert ever", Capacity = 1000, TicketsSold = 0 }
         }
 
         public Task AddConcert(Concert concert)
@@ -29,7 +29,7 @@ namespace TicketSales.Admin.Services
 
         public Task<List<Concert>> GetAll()
         {
-            return Task.FromResult(_concerts);
+            return Task.FromResult(_concerts.ToList());
         }
 
         public Task UpdateConcert(Concert concert)

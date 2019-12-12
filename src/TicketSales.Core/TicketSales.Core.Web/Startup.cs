@@ -9,6 +9,7 @@ using TicketSales.Core.Application.UseCases.CreateConcert;
 using TicketSales.Core.Application.UseCases.SellTickets;
 using TicketSales.Core.Domain.Services;
 using TicketSales.Core.Web.CommandHandlers;
+using TicketSales.Utils.Idempotency;
 
 namespace TicketSales.Core.Web
 {
@@ -24,6 +25,7 @@ namespace TicketSales.Core.Web
             services.AddTransient<ISellTicketsService, SellTicketsService>();
             services.AddTransient<IPublishEvents, EventsPublisher>();
             services.AddTransient<ITicketsService, TicketsService>();
+            services.AddSingleton<IIdempotencyService, IdempotencyService>();
 
             services.AddMassTransit(x =>
             {

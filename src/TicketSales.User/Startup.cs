@@ -9,8 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TicketSales.Core.Web.Commands;
 using TicketSales.User.Consumers;
 using TicketSales.User.Services;
-using Microsoft.EntityFrameworkCore;
-using TicketSales.User.Models;
+using TicketSales.Utils.Idempotency;
 
 namespace TicketSales.User
 {
@@ -35,6 +34,7 @@ namespace TicketSales.User
 
             services.AddSingleton<IStoreConcerts, ConcertStore>();
             services.AddSingleton<IStorePurchases, PurchaseStore>();
+            services.AddSingleton<IIdempotencyService, IdempotencyService>();
 
             services.AddMassTransit(x =>
             {
