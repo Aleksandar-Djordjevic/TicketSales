@@ -5,6 +5,6 @@ namespace TicketSales.Core.Domain.Services
 {
     public interface ITicketsService
     {
-        Result<Purchase> SellTickets(Concert concert, TicketsBuyer buyer, TicketQuantity quantity);
+        Result<Purchase> SellTickets(IConcert concert, TicketsBuyer buyer, TicketQuantity quantity);
     }
 }

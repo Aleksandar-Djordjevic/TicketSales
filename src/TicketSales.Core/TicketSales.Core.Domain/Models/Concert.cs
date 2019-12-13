@@ -3,7 +3,7 @@ using CSharpFunctionalExtensions;
 
 namespace TicketSales.Core.Domain.Models
 {
-    public class Concert
+    public class Concert : IConcert
     {
         public string Id { get; }
         public string Name { get; }

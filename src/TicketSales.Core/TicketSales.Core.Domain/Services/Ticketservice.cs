@@ -5,7 +5,7 @@ namespace TicketSales.Core.Domain.Services
 {
     public class TicketsService : ITicketsService
     {
-        public Result<Purchase> SellTickets(Concert concert, TicketsBuyer buyer, TicketQuantity quantity)
+        public Result<Purchase> SellTickets(IConcert concert, TicketsBuyer buyer, TicketQuantity quantity)
         {
             var ticketsResult = concert.IssueTickets(quantity);
             return ticketsResult

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Moq" Version="4.13.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -17,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>C:\Users\a.djordjevic\.nuget\packages\moq\4.13.0\lib\netstandard2.0\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="xunit.assert">
       <HintPath>C:\Users\a.djordjevic\.nuget\packages\xunit.assert\2.4.1\lib\netstandard1.1\xunit.assert.dll</HintPath>
     </Reference>
