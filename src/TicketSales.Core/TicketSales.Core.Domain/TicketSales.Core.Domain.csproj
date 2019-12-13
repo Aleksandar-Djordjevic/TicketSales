@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="CSharpFunctionalExtensions" Version="2.2.2" />
-    <PackageReference Include="Microsoft.Net.Compilers" Version="2.8.2" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,6 @@
   <ItemGroup>
     <PackageReference Include="MassTransit" Version="5.5.5" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="5.5.5" />
-    <PackageReference Include="Microsoft.Net.Compilers" Version="2.8.2" />
   </ItemGroup>
 
   <ItemGroup>
