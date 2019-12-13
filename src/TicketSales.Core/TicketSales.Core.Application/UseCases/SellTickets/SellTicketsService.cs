@@ -32,34 +32,41 @@ namespace TicketSales.Core.Application.UseCases.SellTickets
             var possibleConcert = await _concertRepository.GetConcert(request.ConcertId);
             var result = await possibleConcert
                 .ToResult(Errors.ConcertNotFound)
+                .OnFailure(error => PublishPurchaseFailure(request, "Unknown"))
                 .Bind(async concert =>
                 {
                     var possibleBuyer = await _buyerRepository.GetBuyer(request.BuyerId);
-                    return possibleBuyer
+                    return await possibleBuyer
                         .ToResult(Errors.BuyerNotFound)
                         .Bind(buyer => _ticketsService.SellTickets(concert, buyer, new TicketQuantity(request.Quantity)))
-                        .Tap(purchase =>
-                        {
-                            _eventPublisher.Publish(new PurchaseSuccessfullyMadeEvent(
-                                Guid.NewGuid().ToString(),
-                                purchase.Id,
-                                purchase.Tickets.Concert.Id,
-                                purchase.Tickets.Concert.Name,
-                                purchase.Buyer.Id,
-                                purchase.Tickets.Quantity
-                            ));
-                        });
-                })
-                .OnFailure(error => {
-                    _eventPublisher.Publish(new PurchaseFailedEvent(
-                        Guid.NewGuid().ToString(),
-                        Guid.NewGuid().ToString(),
-                        request.ConcertId, 
-                        "Unknown", 
-                        request.BuyerId, 
-                        request.Quantity));
+                        .Tap(purchase => PublishPurchaseSuccess(purchase))
+                        .OnFailure(error => PublishPurchaseFailure(request, concert.Name));
                 });
             return result;
+        }
+
+        
+        private Task PublishPurchaseFailure(SellTicketsRequest request, string concertName)
+        {
+            return _eventPublisher.Publish(new PurchaseFailedEvent(
+                Guid.NewGuid().ToString(),
+                Guid.NewGuid().ToString(),
+                request.ConcertId,
+                concertName, 
+                request.BuyerId, 
+                request.Quantity));
+        }
+
+        private void PublishPurchaseSuccess(Purchase purchase)
+        {
+            _eventPublisher.Publish(new PurchaseSuccessfullyMadeEvent(
+                Guid.NewGuid().ToString(),
+                purchase.Id,
+                purchase.Tickets.Concert.Id,
+                purchase.Tickets.Concert.Name,
+                purchase.Buyer.Id,
+                purchase.Tickets.Quantity
+            ));
         }
     }
 }
