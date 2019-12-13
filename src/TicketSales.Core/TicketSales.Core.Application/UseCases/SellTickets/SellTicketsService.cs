@@ -40,25 +40,24 @@ namespace TicketSales.Core.Application.UseCases.SellTickets
                         .Bind(buyer => _ticketsService.SellTickets(concert, buyer, new TicketQuantity(request.Quantity)))
                         .Tap(purchase =>
                         {
-                            _eventPublisher.Publish(new PurchaseSuccessfullyMadeEvent
-                            {
-                                Id = purchase.Id,
-                                ConcertId = purchase.Tickets.Concert.Id,
-                                ConcertName = purchase.Tickets.Concert.Name,
-                                BuyerId = purchase.Buyer.Id,
-                                Quantity = purchase.Tickets.Quantity
-                            });
+                            _eventPublisher.Publish(new PurchaseSuccessfullyMadeEvent(
+                                Guid.NewGuid().ToString(),
+                                purchase.Id,
+                                purchase.Tickets.Concert.Id,
+                                purchase.Tickets.Concert.Name,
+                                purchase.Buyer.Id,
+                                purchase.Tickets.Quantity
+                            ));
                         });
                 })
                 .OnFailure(error => {
-                    _eventPublisher.Publish(new PurchaseFailedEvent
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        ConcertId = request.ConcertId,
-                        ConcertName = "Unknown",// ToDo Alex
-                        BuyerId = request.BuyerId,
-                        Quantity = request.Quantity
-                    });
+                    _eventPublisher.Publish(new PurchaseFailedEvent(
+                        Guid.NewGuid().ToString(),
+                        Guid.NewGuid().ToString(),
+                        request.ConcertId, 
+                        "Unknown", 
+                        request.BuyerId, 
+                        request.Quantity));
                 });
             return result;
         }

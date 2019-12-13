@@ -21,18 +21,18 @@ namespace TicketSales.User.Consumers
 
         public async Task Consume(ConsumeContext<PurchaseFailedEvent> context)
         {
-            if (await _idempotencyService.IsMessageAlreadyProcessed(context.MessageId.ToString()))
+            if (await _idempotencyService.IsMessageAlreadyProcessed(context.Message.EventId))
             {
                 return;
             }
 
-            var purchase = await _purchaseStore.Get(context.Message.Id);
+            var purchase = await _purchaseStore.Get(context.Message.PurchaseId);
             await purchase.Match(
                 Some: null,
                 None: () => _purchaseStore.Add(
                     new Purchase
                     {
-                        Id = context.Message.Id,
+                        Id = context.Message.PurchaseId,
                         BuyerId = context.Message.BuyerId,
                         ConcertId = context.Message.ConcertId,
                         ConcertName = context.Message.ConcertName,

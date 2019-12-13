@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TicketSales.Admin.Models;
 using TicketSales.Admin.Services;
@@ -39,7 +40,7 @@ namespace TicketSales.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _bus.Send(new CreateConcertCommand { Name = concert.Name, SeatingCapacity = concert.Capacity });
+                await _bus.Send(new CreateConcertCommand(Guid.NewGuid().ToString(), concert.Name, concert.Capacity));
                 return RedirectToAction(nameof(Index));
             }
             return View(concert);

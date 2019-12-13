@@ -9,7 +9,5 @@ namespace TicketSales.User.Models
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Only positive number allowed")]
         public int Quantity { get; set; }
-
-        public string MessageId { get; set; }
     }
 }

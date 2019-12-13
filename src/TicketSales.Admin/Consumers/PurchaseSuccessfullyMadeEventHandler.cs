@@ -21,7 +21,7 @@ namespace TicketSales.Admin.Consumers
 
         public async Task Consume(ConsumeContext<PurchaseSuccessfullyMadeEvent> context)
         {
-            if (await _idempotencyService.IsMessageAlreadyProcessed(context.MessageId.ToString()))
+            if (await _idempotencyService.IsMessageAlreadyProcessed(context.Message.EventId))
             {
                 return;
             }

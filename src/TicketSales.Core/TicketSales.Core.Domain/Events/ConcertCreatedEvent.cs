@@ -1,14 +1,18 @@
-﻿namespace TicketSales.Core.Domain.Events
+﻿using System;
+
+namespace TicketSales.Core.Domain.Events
 {
     public class ConcertCreatedEvent
     {
-        public string Id { get; }
+        public string EventId { get; }
+        public string ConcertId { get; }
         public string Name { get; }
         public int SeatingCapacity { get; }
 
-        public ConcertCreatedEvent(string id, string name, int seatingCapacity)
+        public ConcertCreatedEvent(string eventId, string concertId, string name, int seatingCapacity)
         {
-            Id = id;
+            EventId = eventId;
+            ConcertId = concertId;
             Name = name;
             SeatingCapacity = seatingCapacity;
         }
