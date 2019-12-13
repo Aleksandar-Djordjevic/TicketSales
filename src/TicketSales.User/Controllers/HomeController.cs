@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Operations;
 using TicketSales.Core.Web.Commands;
 using TicketSales.User.Models;
 using TicketSales.User.Services;
@@ -56,8 +57,8 @@ namespace TicketSales.User.Controllers
 
             if (ModelState.IsValid)
             {
-                await _bus.Send(new SellTicketsCommand(Guid.NewGuid().ToString(), "1", concertToBuy.Id, concertToBuy.Quantity));
-                return RedirectToAction(nameof(Index));
+                await _bus.Send(new SellTicketsCommand(Guid.NewGuid().ToString(), concertToBuy.Id, "1", concertToBuy.Quantity));
+                return RedirectToAction("Index", "Purchases");
             }
             return View(concertToBuy);
         }
