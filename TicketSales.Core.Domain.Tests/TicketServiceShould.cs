@@ -28,6 +28,20 @@ namespace TicketSales.Core.Domain.Tests
         }
 
         [Fact]
+        public void AddTicketsToBuyerWhenIssuingTicketsSucceeds()
+        {
+            var tickets = BuildTickets();
+            var concert = SetUpConcertWhichIssueTickets(tickets);
+            var buyer = new TicketsBuyer("1", "Buyer name");
+            var wantedQuantity = new TicketQuantity(5);
+            var service = new TicketsService();
+
+            service.SellTickets(concert, buyer, wantedQuantity);
+
+            Assert.NotEmpty(buyer.Purchases);
+        }
+
+        [Fact]
         public void ReturnFailureWhenIssuingTicketsFails()
         {
             var errorMessage = "Some error occured";
